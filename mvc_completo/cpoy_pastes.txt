@@ -1,0 +1,160 @@
+    
+ <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Email</th>
+                <th>DNI</th>
+                <th>Cuenta Corriente</th>
+                <th>Talla</th>
+                <th>Fecha Nacimiento</th>
+                <th>Rol</th>
+<?php if (tienePrivilegios($datos['usuarioSesion']->rol,[0])):?>
+                <th>Acciones</th>
+<?php endif ?>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($datos['usuarios'] as $uruario): ?>
+                <tr>
+                    <td><?php echo $uruario->id_user ?></td>
+                    <td><?php echo $uruario->nombre ?></td>
+                    <td><?php echo $uruario->apellido ?></td>
+                    <td><?php echo $uruario->email ?></td>
+                    <td><?php echo $uruario->Dni ?></td>
+                    <td><?php echo $uruario->CC ?></td>
+                    <td><?php echo $uruario->talla ?></td>
+                    <td><?php echo $uruario->fecha_nac ?></td>
+                    <td><?php echo $uruario->rol ?></td>
+
+
+<?php if (tienePrivilegios($datos['usuarioSesion']->rol,[0]) && $uruario->rol!=0):?>
+                    <td>
+                        <button type="button" class="btn  btn-block editUruario"  data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="usuarioActual(<?php echo $uruario->id_user?>,0)">
+                            <i class="bi bi-pencil-square"></i>
+                        </button> 
+                        &nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-outline-danger btn-block" data-bs-toggle="modal" data-bs-target="#Modal_Borrar" onclick="usuarioActual(<?php echo $uruario->id_user?>,1)">
+                            <i class="bi bi-person-x-fill"></i>
+                        </button> 
+                    </td>
+<?php else: ?>
+    <td>No Actions Avaliable</td>
+<?php endif ?>
+
+                </tr>
+            <?php endforeach ?>
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//-----------------------------------------------------------inicio.php de vistas
+<?php 
+
+  require_once RUTA_APP.'/vistas/inc/header.php';
+  
+
+?>
+
+<div class="container">
+  <?php if ($isAdmin) { ?>
+    <?php require_once RUTA_APP.'/vistas/inicios/admin_inc.php' ?>
+
+  <?php } ?>
+
+
+  <?php if ($isTienda) {
+    require_once RUTA_APP.'/vistas/inicios/tienda_inc.php';
+  } ?>
+
+<?php if ($isSocio) {
+    require_once RUTA_APP.'/vistas/inicios/socios_inc.php';
+  } ?>
+
+<?php if ($isEntrendor) {
+    require_once RUTA_APP.'/vistas/inicios/entrenador_inc.php';
+  } ?>
+
+</div>
+
+<?php require_once RUTA_APP.'/vistas/inc/footer.php' ?> 
+//----------------------------------------------------------------fin
